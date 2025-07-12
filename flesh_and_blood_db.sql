@@ -69,3 +69,29 @@ INSERT INTO Classes (Class_id, ClassName) VALUES
 (1, 'Warrior'),
 (2, 'Guardian'),
 (3, 'Generic');
+
+
+
+INSERT INTO Cards (Card_id, CardName, Type_id, Colour_id) VALUES
+(1, 'In the swing', 1, 1),
+(2, 'Raise an Army', 2, 2),
+(3, 'Provoke', 1, 3),
+(4, 'Spinal Crush', 3, 1),
+(5, 'The Golden Son', 2, 2),
+(6, 'Macho Grande', 3, 3),
+(7, 'Sink Below', 4, 1),
+(8, 'Pummel', 1, 2),
+(9, 'Trot Along', 2, 3);
+
+
+
+INSERT INTO CardClasses (Card_id, Class_id) VALUES
+(1, 1), -- In the swing → Warrior
+(2, 1), -- Raise an Army → Warrior
+(3, 1), -- Provoke → Warrior
+(4, 2), -- Spinal Crush → Guardian
+(5, 2), -- The Golden Son → Guardian
+(6, 2), -- Macho Grande → Guardian
+(7, 3), -- Sink Below → Generic
+(8, 3), -- Pummel → Generic
+(9, 3); -- Trot Along → Generic
