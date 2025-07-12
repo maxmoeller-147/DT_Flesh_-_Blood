@@ -14,16 +14,19 @@ CREATE TABLE Colours (
 );
 
 
+
 CREATE TABLE Types (
     Type_id INT PRIMARY KEY,
     TypeName VARCHAR(100) NOT NULL
 );
 
 
+
 CREATE TABLE Classes (
     Class_id INT PRIMARY KEY,
     ClassName VARCHAR(100) NOT NULL
 );
+
 
 
 CREATE TABLE Cards (
@@ -36,6 +39,7 @@ CREATE TABLE Cards (
 );
 
 
+
 CREATE TABLE CardClasses (
     Card_id INT NOT NULL,
     Class_id INT NOT NULL,
@@ -45,7 +49,23 @@ CREATE TABLE CardClasses (
 );
 
 
+
 INSERT INTO Colours (Colour_id, ColourName) VALUES
 (1, 'Red'),
 (2, 'Yellow'),
 (3, 'Blue');
+
+
+
+INSERT INTO Types (Type_id, TypeName) VALUES
+(1, 'Attack Reaction'),
+(2, 'Action Card'),
+(3, 'Attack Action'),
+(4, 'Defense Reaction');
+
+
+
+INSERT INTO Classes (Class_id, ClassName) VALUES
+(1, 'Warrior'),
+(2, 'Guardian'),
+(3, 'Generic');
