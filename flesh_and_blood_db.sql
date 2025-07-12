@@ -43,3 +43,9 @@ CREATE TABLE CardClasses (
     FOREIGN KEY (Card_id) REFERENCES Cards(Card_id), ON DELETE CASCADE
     FOREIGN KEY (Class_id) REFERENCES Classes(Class_id) ON DELETE CASCADE
 );
+
+
+INSERT INTO Colours (Colour_id, ColourName) VALUES
+(1, 'Red'),
+(2, 'Yellow'),
+(3, 'Blue');
