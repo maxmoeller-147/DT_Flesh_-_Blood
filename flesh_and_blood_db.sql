@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS CardClasses
-DROP TABLE IF EXISTS Cards
-DROP TABLE IF EXISTS Classes
-DROP TABLE IF EXISTS Types
-DROP TABLE IF EXISTS Colours
+DROP TABLE IF EXISTS CardClasses;
+DROP TABLE IF EXISTS Cards;
+DROP TABLE IF EXISTS Classes;
+DROP TABLE IF EXISTS Types;
+DROP TABLE IF EXISTS Colours;
 
 
 
@@ -44,7 +44,7 @@ CREATE TABLE CardClasses (
     Card_id INT NOT NULL,
     Class_id INT NOT NULL,
     PRIMARY KEY (Card_id, Class_id),
-    FOREIGN KEY (Card_id) REFERENCES Cards(Card_id), ON DELETE CASCADE
+    FOREIGN KEY (Card_id) REFERENCES Cards(Card_id) ON DELETE CASCADE,
     FOREIGN KEY (Class_id) REFERENCES Classes(Class_id) ON DELETE CASCADE
 );
 
@@ -95,3 +95,10 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES
 (7, 3), -- Sink Below → Generic
 (8, 3), -- Pummel → Generic
 (9, 3); -- Trot Along → Generic
+
+
+SELECT * FROM Types;
+SELECT * FROM Colours;
+SELECT * FROM Classes;
+SELECT * FROM Cards;
+SELECT * FROM CardClasses;
