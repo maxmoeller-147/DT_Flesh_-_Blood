@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS Colours CASCADE;
 
 
 
-
+-- TABLES:
 
 CREATE TABLE Colours (
     Colour_id INT PRIMARY KEY,
@@ -59,6 +59,8 @@ CREATE TABLE CardClasses (
 );
 
 
+
+-- INSERTIONS:
 
 INSERT INTO Colours (Colour_id, ColourName) VALUES
 (1, 'Red'),
@@ -120,6 +122,10 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES
 (9, 3); -- Trot Along → Generic
 
 
+
+
+-- QUERIES:
+
 -- SELECT * FROM Types;
 -- SELECT * FROM Colours;
 -- SELECT * FROM Classes;
@@ -128,13 +134,28 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES
 -- SELECT * FROM CardClasses;
 
 
+
+SELECT * FROM Cards WHERE CardName = 'Pummel';
+-- This query display a card searched by name
+
+
+
+SELECT c.Card_id, c.CardName, t.TypeName, col.ColourName, d.Cost, d.Abilitie FROM Cards c
+JOIN Types t ON c.Type_id = t.Type_id
+JOIN Colours col ON c.Colour_id = col.Colour_id
+JOIN CardDescription d ON c.Card_id = d.Card_id
+WHERE c.Card_id = 5;
+-- This query display a all the information about an specific card, in this case (Card_id = 5)
+
+
+
 SELECT AVG(Cost) FROM CardDescription WHERE Card_id = 2;
 -- Average of Cards that cost 2
 
 
-SELECT AVG(cd.Cost) AS AverageCost_Red 
-FROM CardDescription cd
+
+SELECT AVG(cd.Cost) AS AverageCost_Red FROM CardDescription cd
 JOIN Cards c ON cd.Card_id = c.Card_id
 JOIN Colours col ON c.Colour_id = col.Colour_id
 WHERE col.ColourName = 'Red';
-
+-- Average Cost of Red Cards
