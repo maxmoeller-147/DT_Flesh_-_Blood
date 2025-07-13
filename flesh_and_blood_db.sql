@@ -123,6 +123,23 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES
 
 
 
+-- UPDATES, DELETE AND MORE INSERTIONS:
+
+INSERT INTO Cards (Card_id, CardName, Type_id, Colour_id)
+VALUES (10, 'Pint of Strong and Stout', 2, 3);
+
+INSERT INTO CardDescription (Card_id, Cost, Ability)
+VALUES (10, 2, 'Create an Agility and Vigor Token');
+
+INSERT INTO CardClasses (Card_id, Class_id)
+VALUES (10, 1);
+--Insertion of a new card into the tables that relate.
+
+
+
+
+
+
 
 -- QUERIES:
 
@@ -137,7 +154,8 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES
 
 SELECT * FROM Cards WHERE CardName = 'Pummel';
 -- This query display a card searched by name
-
+SELECT * FROM Cards WHERE CardName = 'Pint of Strong and Stout';
+-- To display and test the new insertions.
 
 
 SELECT c.Card_id, c.CardName, t.TypeName, col.ColourName, d.Cost, d.Abilitie FROM Cards c
