@@ -128,7 +128,7 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES
 INSERT INTO Cards (Card_id, CardName, Type_id, Colour_id)
 VALUES (10, 'Pint of Strong and Stout', 2, 3);
 
-INSERT INTO CardDescription (Card_id, Cost, Ability)
+INSERT INTO CardDescription (Card_id, Cost, Abilitie)
 VALUES (10, 2, 'Create an Agility and Vigor Token');
 
 INSERT INTO CardClasses (Card_id, Class_id)
@@ -136,6 +136,18 @@ VALUES (10, 1);
 --Insertion of a new card into the tables that relate.
 
 
+
+UPDATE CardDescription
+SET Cost = 4,
+    Abilitie = 'Create 4 Gold Tokens'
+WHERE Card_id = 5;
+-- Update a current card
+
+
+
+DELETE FROM Cards
+WHERE Card_id = 10;
+-- The previously added card will be deleted 
 
 
 
@@ -152,10 +164,11 @@ VALUES (10, 1);
 
 
 
-SELECT * FROM Cards WHERE CardName = 'Pummel';
+SELECT * FROM Cards WHERE CardName = 'Provoke';
 -- This query display a card searched by name
 SELECT * FROM Cards WHERE CardName = 'Pint of Strong and Stout';
 -- To display and test the new insertions.
+
 
 
 SELECT c.Card_id, c.CardName, t.TypeName, col.ColourName, d.Cost, d.Abilitie FROM Cards c
@@ -177,3 +190,23 @@ JOIN Cards c ON cd.Card_id = c.Card_id
 JOIN Colours col ON c.Colour_id = col.Colour_id
 WHERE col.ColourName = 'Red';
 -- Average Cost of Red Cards
+
+
+
+SELECT c.CardName, cd.Cost
+FROM Cards c
+JOIN CardDescription cd ON c.Card_id = cd.Card_id
+ORDER BY cd.Cost ASC;
+-- Order Lowest to Highest 
+
+
+
+SELECT 
+    c.CardName, 
+    col.ColourName, 
+    cd.Cost
+FROM Cards c
+JOIN Colours col ON c.Colour_id = col.Colour_id
+JOIN CardDescription cd ON c.Card_id = cd.Card_id
+ORDER BY col.ColourName ASC, cd.Cost ASC;
+-- Order by Color and Cost (Low to high)
