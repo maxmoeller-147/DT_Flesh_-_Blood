@@ -136,15 +136,12 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES (10, 1);
 
 
 
-UPDATE CardDescription
-SET Cost = 4, Abilitie = 'Create 4 Gold Tokens'
-WHERE Card_id = 5;
+UPDATE CardDescription SET Cost = 4, Abilitie = 'Create 4 Gold Tokens' WHERE Card_id = 5;
 -- Update a current card
 
 
 
-DELETE FROM Cards
-WHERE Card_id = 10;
+DELETE FROM Cards WHERE Card_id = 10;
 -- The previously added card will be deleted 
 
 
@@ -153,11 +150,11 @@ WHERE Card_id = 10;
 
 -- QUERIES:
 
+SELECT * FROM CardDescription;
+SELECT * FROM Cards;
 -- SELECT * FROM Types;
 -- SELECT * FROM Colours;
 -- SELECT * FROM Classes;
--- SELECT * FROM CardDescription;
--- SELECT * FROM Cards;
 -- SELECT * FROM CardClasses;
 
 
@@ -210,8 +207,7 @@ WHERE cl.ClassName = 'Warrior' AND col.ColourName = 'Blue';
 
 
 
-SELECT cl.ClassName, MAX(cd.Cost) AS MaxCostPerClass
-FROM Cards c
+SELECT cl.ClassName, MAX(cd.Cost) AS MaxCostPerClass FROM Cards c
 JOIN CardDescription cd ON c.Card_id = cd.Card_id
 JOIN CardClasses cc ON c.Card_id = cc.Card_id
 JOIN Classes cl ON cc.Class_id = cl.Class_id
