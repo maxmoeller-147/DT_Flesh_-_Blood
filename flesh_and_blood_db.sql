@@ -1,8 +1,9 @@
-DROP TABLE IF EXISTS CardClasses;
-DROP TABLE IF EXISTS Cards;
-DROP TABLE IF EXISTS Classes;
-DROP TABLE IF EXISTS Types;
-DROP TABLE IF EXISTS Colours;
+DROP TABLE IF EXISTS CardClasses CASCADE;
+DROP TABLE IF EXISTS Cards CASCADE;
+DROP TABLE IF EXISTS CardDescription CASCADE;
+DROP TABLE IF EXISTS Classes CASCADE;
+DROP TABLE IF EXISTS Types CASCADE;
+DROP TABLE IF EXISTS Colours CASCADE;
 
 
 
@@ -36,6 +37,15 @@ CREATE TABLE Cards (
     CardName VARCHAR(100) NOT NULL,
     FOREIGN KEY (Colour_id) REFERENCES Colours(Colour_id) ON DELETE CASCADE,
     FOREIGN KEY (Type_id) REFERENCES Types(Type_id) ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE CardDescription (
+    Card_id INT PRIMARY KEY,
+    Cost INT,
+    Abilitie TEXT,
+    FOREIGN KEY (Card_id) REFERENCES Cards(Card_id) ON DELETE CASCADE
 );
 
 
@@ -85,6 +95,19 @@ INSERT INTO Cards (Card_id, CardName, Type_id, Colour_id) VALUES
 
 
 
+INSERT INTO CardDescription (Card_id, Cost, Abilitie) VALUES
+(1, 3, 'Your weapon get +3, play this only if is your second attack.'),
+(2, 2, 'Pay X gold and create X allies.'),
+(3, 3, 'The opponent must defend with a card.'),
+(4, 6, 'If it deals more than 4 dmg opponent discards a card.'),
+(5, 5, 'Create 3 Gold.'),
+(6, 7, 'Deal 10 damage.'),
+(7, 2, 'Defend 4 dmg as a reaction.'),
+(8, 0, 'Boosts your attack for 6 dmg.'),
+(9, 3, 'Your next attack gains go again.');
+
+
+
 INSERT INTO CardClasses (Card_id, Class_id) VALUES
 (1, 1), -- In the swing → Warrior
 (2, 1), -- Raise an Army → Warrior
@@ -97,8 +120,21 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES
 (9, 3); -- Trot Along → Generic
 
 
-SELECT * FROM Types;
-SELECT * FROM Colours;
-SELECT * FROM Classes;
-SELECT * FROM Cards;
-SELECT * FROM CardClasses;
+-- SELECT * FROM Types;
+-- SELECT * FROM Colours;
+-- SELECT * FROM Classes;
+-- SELECT * FROM CardDescription;
+-- SELECT * FROM Cards;
+-- SELECT * FROM CardClasses;
+
+
+SELECT AVG(Cost) FROM CardDescription WHERE Card_id = 2;
+-- Average of Cards that cost 2
+
+
+SELECT AVG(cd.Cost) AS AverageCost_Red 
+FROM CardDescription cd
+JOIN Cards c ON cd.Card_id = c.Card_id
+JOIN Colours col ON c.Colour_id = col.Colour_id
+WHERE col.ColourName = 'Red';
+
