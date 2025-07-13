@@ -128,18 +128,16 @@ INSERT INTO CardClasses (Card_id, Class_id) VALUES
 INSERT INTO Cards (Card_id, CardName, Type_id, Colour_id)
 VALUES (10, 'Pint of Strong and Stout', 2, 3);
 
-INSERT INTO CardDescription (Card_id, Cost, Abilitie)
+INSERT INTO CardDescription (Card_id, Cost, Abilitie) 
 VALUES (10, 2, 'Create an Agility and Vigor Token');
 
-INSERT INTO CardClasses (Card_id, Class_id)
-VALUES (10, 1);
+INSERT INTO CardClasses (Card_id, Class_id) VALUES (10, 1);
 --Insertion of a new card into the tables that relate.
 
 
 
 UPDATE CardDescription
-SET Cost = 4,
-    Abilitie = 'Create 4 Gold Tokens'
+SET Cost = 4, Abilitie = 'Create 4 Gold Tokens'
 WHERE Card_id = 5;
 -- Update a current card
 
@@ -166,7 +164,7 @@ WHERE Card_id = 10;
 
 SELECT * FROM Cards WHERE CardName = 'Provoke';
 -- This query display a card searched by name
-SELECT * FROM Cards WHERE CardName = 'Pint of Strong and Stout';
+SELECT * FROM Cards WHERE CardName = 'Pummel';
 -- To display and test the new insertions.
 
 
@@ -180,8 +178,8 @@ WHERE c.Card_id = 5;
 
 
 
-SELECT AVG(Cost) FROM CardDescription WHERE Card_id = 2;
--- Average of Cards that cost 2
+SELECT AVG(cd.Cost) AS AverrageCost FROM CardDescription cd;
+-- Average Cost of all cards
 
 
 
@@ -193,19 +191,44 @@ WHERE col.ColourName = 'Red';
 
 
 
-SELECT c.CardName, cd.Cost
+SELECT SUM(cd.Cost) AS GuardianTotalCost FROM Cards c
+JOIN CardDescription cd ON c.Card_id = cd.Card_id
+JOIN CardClasses cc ON c.Card_id = cc.Card_id
+JOIN Classes cl ON cc.Class_id = cl.Class_id
+WHERE cl.ClassName = 'Guardian';
+-- Total Cost of all Guardian Cards
+
+
+
+SELECT SUM(cd.Cost) AS TotalCost_Blue_Warrior FROM Cards c
+JOIN CardDescription cd ON c.Card_id = cd.Card_id
+JOIN CardClasses cc ON c.Card_id = cc.Card_id
+JOIN Classes cl ON cc.Class_id = cl.Class_id
+JOIN Colours col ON c.Colour_id = col.Colour_id
+WHERE cl.ClassName = 'Warrior' AND col.ColourName = 'Blue';
+-- Total cost of all bluue Warrior cards
+
+
+
+SELECT cl.ClassName, MAX(cd.Cost) AS MaxCostPerClass
 FROM Cards c
+JOIN CardDescription cd ON c.Card_id = cd.Card_id
+JOIN CardClasses cc ON c.Card_id = cc.Card_id
+JOIN Classes cl ON cc.Class_id = cl.Class_id
+GROUP BY cl.ClassName;
+-- Order by Max Cost Per Class
+
+
+
+
+SELECT c.CardName, cd.Cost FROM Cards c
 JOIN CardDescription cd ON c.Card_id = cd.Card_id
 ORDER BY cd.Cost ASC;
 -- Order Lowest to Highest 
 
 
 
-SELECT 
-    c.CardName, 
-    col.ColourName, 
-    cd.Cost
-FROM Cards c
+SELECT c.CardName, col.ColourName, cd.Cost FROM Cards c
 JOIN Colours col ON c.Colour_id = col.Colour_id
 JOIN CardDescription cd ON c.Card_id = cd.Card_id
 ORDER BY col.ColourName ASC, cd.Cost ASC;
